@@ -1,0 +1,215 @@
+<html>
+    <head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<style>
+  .imgwithbuttons
+  {
+    position:relative;
+  }
+  .imgwithbuttons .delete
+      {
+    position:absolute;
+    top:0;
+    right:0;
+  }
+
+  .imgwithbuttons .edit
+        {
+    position:absolute;
+    top:0;
+    left:0;
+  }
+    </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#"><img src="https://as1.ftcdn.net/v2/jpg/04/50/54/80/1000_F_450548040_4oGP6VXOAVEdVxJncpujtOprwC1jVBsi.jpg" width="100px" height="50px"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item" onclick="create_initapp()">
+                    <a class="nav-link" href="#">MovieList</a>
+                  </li>
+                  <li class="nav-item " onclick="openform()">
+                   
+                    <a class="nav-link " href="#" id="navbarDropdown"  aria-expanded="false" >
+                      Add Movies
+                    </a>
+                   <!--
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  -->
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchbox">
+                  <button class="btn btn-outline-success" type="submit" onclick="searchforamovie()">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+          <div class="form-container" style="float: right; background-color:black; color:white; padding:20px; height: 100vh; display:none">
+              <h5>Enter avatar or poster image address:</h5><input type="text" size="36" class="imgaddress">
+              <h5>Enter movietitle:</h5><input type="text" size="36" class="title">
+              <h5>Enter moviereleasedate:</h5><input type="text" size="36" class="date">
+              <h5>Enter moviedescription:</h5><input type="text" size="36" class="description">
+              <h5>Enter movieratings:</h5><input type="text" size="36" class="ratings">
+              <h5>Enter trailerlink</h5><input type="text" size="36" class="trailerlink">
+              <h5>Enter actors or characters</h5><input type="text" size="36" class="actors">
+              <h5>Enter Director name</h5><input type="text" size="36" class="director">
+              <h5>Cast pics array</h5><input type="text" size="36" class="cast">
+              <h5>Enter story plot</h5><input type="text" size="36" class="plot">
+              <h5>Enter the duration of movie</h5><input type="text" size="36" class="duration">
+              <h5>slide image array</h5><input type="text" size="36" class="slide">
+              
+              
+              
+              
+              
+       
+            <div style="margin-top: 20px;"><button style="padding:3px 20px; background-color:blue; color:white; border-radius: 30px;" onclick="addmovie()">Add it</button></div>                    
+            <div style="margin-top: 20px;"><button id="updatebtn" style="padding:3px 20px; background-color:blue; color:white; border-radius: 30px;">Update it</button></div>                    
+              
+         </div>
+         <div style="background-color: black; opacity:1" class="entirecontainer">
+         <div class="container">
+          <div class="row movieinfo">
+          <!--
+              <div class="col-md-6" >
+              <div class="card" style="width: 40rem; height: 40rem">
+                <div class="card-header">
+                <h2>Movie info</h2>
+                </div>  
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item" style="color:red"><h1>Sita Ramam</h1></li>
+                  <li class="list-group-item"><h2>Dulquer Salman,Mrunal Thakur,Rashmika Mandanna</h2></li>
+                  <li class="list-group-item"><h2>Directed by Hanu Raghavapudi</h2></li>
+                  <li class="list-group-item" style="margin-right:60px"><h2>
+                    <img src="https://images.hindustantimes.com/img/2022/04/09/550x309/05e867d8-b82b-11ec-a4f3-fc37f02059fa_1649532004301.jpg" height="50px" width="50px" alt="" title="actor-dulquersalman">
+                    <img src="https://i0.wp.com/iansportalimages.s3.amazonaws.com/images/2023100665.JPG?w=696&ssl=1" alt="" height="50px" width="50px" title="actress-mrunal thakur">
+                    <img src="https://www.telugu360.com/wp-content/uploads/2022/08/Hanu-Raghavapudi.jpg" alt="" height="50px" width="50px" title="director-Hanu Raghuvapudi">
+                    <img src="https://st1.latestly.com/wp-content/uploads/2022/08/resize-13-4-380x214.jpg" alt="" height="50px" width="50px" title="music director-Vishal">
+                  </li>
+                  <li class="list-group-item">Tamil | Love, Drama | <span class="timing">
+                    <i class="fa fa-clock-o"></i></span>
+                
+                    2hrs 6 mns</li>  
+                </ul>
+                
+                <div class="watchmovie" style="margin-top: 20px;"><a href="#" class="btn btn-primary">Click to download</a></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide"><img src="https://wallpapercave.com/wp/wp11372867.jpg" height="100%" width="100%"></div>
+                  <div class="swiper-slide"><img src="https://wallpapercave.com/wp/wp11393567.jpg" height="100%" width="100%"></div>
+                  <div class="swiper-slide"><img src="https://www.enrightpr.in/wp-content/uploads/2022/08/dulquer-salmaan-sita-ramam.jpg" height="100%" width="100%"></div>
+                  <div class="swiper-slide"><img src="https://wallpapercave.com/wp/wp11393570.jpg" height="100%" width="100%"></div>
+                  <div class="swiper-slide"><img src="https://imgeng.jagran.com/images/2022/jul/SitaRamamTrailer1658749654808.jpg" height="100%" width="100%"></div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+              </div>
+            </div>
+          
+            
+            -- Initialize Swiper --
+            <script>
+              var swiper = new Swiper(".mySwiper", {
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: {
+                  delay: 2500,
+                  disableOnInteraction: false,
+                },
+                pagination: {
+                  el: ".swiper-pagination",
+                  clickable: true,
+                },
+                navigation: {
+                  nextEl: ".swiper-button-next",
+                  prevEl: ".swiper-button-prev",
+                },
+              });
+            </script>
+              
+          -->
+          </div>
+         </div>
+
+          
+
+           <div class="container" style="margin-top: 20px;">
+            <div class="row movie-container">
+            <!--    
+                <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                    <div class="imgwithbutton">
+                        <img src="${movie.avatar}" class="card-img-top" alt="..." height="300px" width="300px">
+                        <button style="border:none" ><i class="fa fa-close"></i></button>
+                     </div>   
+                          <div class="card-body">
+                        
+                            <h3 class="card-title">Sita_Ramam</h3>
+                            <h5 class="release-date" >Released on 5 August 2022 </h5>
+                             <p class="card-text">Set in 1964, it tells the story of Lieutenant Ram, an orphaned army officer serving at the Kashmir border, gets anonymous love letters from Sita Mahalakshmi, after which Ram is on a mission to find Sita and propose his love.</p>
+                          <span class="ratings"><img src="https://cdn.iconscout.com/icon/free/png-512/free-star-bookmark-favorite-shape-rank-like-32386.png?f=webp&w=256" height="25px" width="25px"></span>
+                          <b>8.5</b>
+                          
+                          <div class="watchtrailer" style="margin-top: 20px;"><a href="https://youtu.be/Ljk6tGZ1l3A?si=AmJC6BYGhfzqJqZn" class="btn btn-primary">Watch Trailer</a></div>
+                        </div>
+                      </div> 
+                </div>
+                
+                <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQzStNSFt_Of45IA813SS-sHZPYFZN_yU94Ofhna7ebKlWnpfCq" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Sita_Ramam</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Watch Trailer</a>
+                        </div>
+                      </div> 
+                
+                </div>
+                <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQzStNSFt_Of45IA813SS-sHZPYFZN_yU94Ofhna7ebKlWnpfCq" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Sita_Ramam</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Watch Trailer</a>
+                        </div>
+                      </div> 
+                </div>
+              -->
+            </div>
+        </div>
+        </div>  
+        <script src="1.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+      
+    </body>
+
+    </html>
